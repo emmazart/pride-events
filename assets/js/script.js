@@ -77,7 +77,6 @@ function getLocation(location){
             return res.json();
         })
         .then(function (data) {
-            console.log(data);
             let lat = data[0].lat;
             let long = data[0].lon;
             let coordinates = {
@@ -94,6 +93,8 @@ function getLocation(location){
             if (lat && long) {
                 let bathroomApiUrl = `https://www.refugerestrooms.org/api/v1/restrooms/by_location?page=1&per_page=10&offset=0&lat=${lat}&lng=${long}`;
                 getBathroom(bathroomApiUrl);
+            } else {
+                // print "bad api call" to page - try again message
             }
         
         })
@@ -105,7 +106,7 @@ function getCoordinates(event) {
 
     let location = {
         city: document.querySelector('#location-input').value,
-        state: 'Minnesota'
+        state: document.querySelector('#state-input').value
     };
 
     getLocation(location);
